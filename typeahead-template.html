@@ -1,0 +1,14 @@
+<ng-template  #rt let-r="result" let-t="term" >
+  <span *ngIf="r.tip">!</span>
+  <ngb-highlight
+  [result]="r.name" [term]="t"></ngb-highlight>
+</ng-template>
+
+<label for="typeahead-template">Search for a state:</label>
+<input id="typeahead-template" type="text" class="form-control block-event-item-count search-input" 
+[ngClass]="{'block-event-validation-tip':isToolTipActive}"
+[(ngModel)]="model" name="companyName" #companyName="ngModel" [ngbTypeahead]="search" [resultTemplate]="rt" [focusFirst] = "false"
+  [inputFormatter]="formatter" (blur)="onBlur(model)" (selectItem)="selectedItem($event)" typeaheadRequired />
+<hr>
+<pre>Model: {{ model | json }}</pre>
+<span *ngIf="companyName.errors?.typeaheadInputRequired">test</span>

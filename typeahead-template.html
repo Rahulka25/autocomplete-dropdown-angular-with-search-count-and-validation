@@ -1,0 +1,13 @@
+<ng-template  #rt let-r="result" let-t="term" >
+  <img [src]="'https://upload.wikimedia.org/wikipedia/commons/thumb/' + r['flag']" class="mr-1" style="width: 16px">
+  <ngb-highlight style="width:100%"
+  [result]="r.name" [term]="t"></ngb-highlight>
+</ng-template>
+
+<label for="typeahead-template">Search for a state:</label>
+<input id="typeahead-template" type="text" class="form-control block-event-item-count" 
+[ngClass]="{'block-event-validation-tip':isToolTipActive}"
+[(ngModel)]="model" [ngbTypeahead]="search" [resultTemplate]="rt"
+  [inputFormatter]="formatter" (blur)="onBlur(model)" (selectItem)="selectedItem($event)" />
+<hr>
+<pre>Model: {{ model | json }}</pre>
